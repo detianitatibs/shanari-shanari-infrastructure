@@ -34,3 +34,7 @@ ToDo: 自動でバージョンを変更するか、実行時に引数として�
 ```bash
 $ kubectl delete -f local -R
 ```
+
+# GCP 環境
+
+![](img/)
