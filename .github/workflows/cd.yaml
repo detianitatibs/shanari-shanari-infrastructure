@@ -37,14 +37,14 @@ jobs:
 
       # OpenTofu
       - uses: "opentofu/setup-opentofu@v1"
-      - name: "Change Directory to Tofu directory"
-        run: cd tofu/gcp
       - name: "OpenTofu init"
         id: "init"
+        working-directory: "tofu/gcp"
         run: |
           tofu init \
           -backend-config="bucket=${STATE_BUCKET}" \
           -backend-config="prefix=${STATE_PREFIX}"
       - name: "OpenTofu plan"
         id: "plan"
+        working-directory: "tofu/gcp"
         run: tofu plan -input=false
