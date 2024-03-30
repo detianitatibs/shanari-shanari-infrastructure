@@ -37,6 +37,8 @@ jobs:
 
       # OpenTofu
       - uses: "opentofu/setup-opentofu@v1"
+      - name: "Change Directory to Tofu directory"
+        run: cd tofu/gcp
       - name: "OpenTofu init"
         id: "init"
         run: |
