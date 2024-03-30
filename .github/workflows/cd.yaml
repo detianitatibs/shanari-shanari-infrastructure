@@ -27,7 +27,7 @@ jobs:
 
       # Configure Workload Identity Federation and generate an access token.
       - id: "auth"
-        name: "Authenticate to Google Cloud."
+        name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
         with:
           token_format: "access_token"
@@ -40,8 +40,8 @@ jobs:
       - name: "OpenTofu init"
         id: "init"
         run: tofu init \
-          - -backend-config="bucket=${STATE_BUCKET}"
-          - -backend-config="prefix=${STATE_PREFIX}"
+          -backend-config="bucket=${STATE_BUCKET}" \
+          -backend-config="prefix=${STATE_PREFIX}"
       - name: "OpenTofu plan"
         id: "plan"
         run: tofu plan -input=false
