@@ -39,7 +39,8 @@ jobs:
       - uses: "opentofu/setup-opentofu@v1"
       - name: "OpenTofu init"
         id: "init"
-        run: tofu init \
+        run: |
+          tofu init \
           -backend-config="bucket=${STATE_BUCKET}" \
           -backend-config="prefix=${STATE_PREFIX}"
       - name: "OpenTofu plan"
