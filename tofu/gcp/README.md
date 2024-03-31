@@ -38,7 +38,7 @@ prefix  = "<THE PREFIX OF STATE>"
 
 ```bash
 $ cd tofu/gcp
-$ tofu init --backend-config=prod/backend.tf
+$ tofu init --backend-config=prod/backend.tfvars
 $ tofu plan -input=false -var-file=prod/terraform.tfvars
 $ tofu apply -input=false -var-file=prod/terraform.tfvars -auto-approve
 ```
