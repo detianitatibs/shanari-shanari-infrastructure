@@ -46,5 +46,5 @@ $ tofu apply -input=false -var-file=prod/terraform.tfvars -auto-approve
 以下のコマンドよりリソースを削除する。
 
 ```bash
-$ tofu destroy -var-file=prod/terraform.tfvars
+$ tofu destroy -var-file=prod/terraform.tfvars -auto-approve
 ```

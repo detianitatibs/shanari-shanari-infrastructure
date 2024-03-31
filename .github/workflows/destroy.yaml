@@ -1,9 +1,6 @@
 name: Deploy infra resources to GCP
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
   workflow_dispatch:
 
 env:
@@ -46,12 +43,7 @@ jobs:
           tofu init \
           -backend-config="bucket=${STATE_BUCKET}" \
           -backend-config="prefix=${STATE_PREFIX}"
-      - name: "OpenTofu plan"
-        id: "plan"
-        working-directory: "tofu/gcp"
-        run: tofu plan -input=false
-      - name: "OpenTofu apply"
+      - name: "OpenTofu destroy"
         id: "apply"
-        if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
         working-directory: "tofu/gcp"
-        run: tofu apply -input=false -auto-approve
+        run: tofu destroy -input=false -auto-approve
