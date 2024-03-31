@@ -2,7 +2,7 @@ name: Deploy infra resources to GCP
 
 on:
   push:
-    branches: ["main", "6-build-gke"]
+    branches: ["main"]
   pull_request:
 
 env:
