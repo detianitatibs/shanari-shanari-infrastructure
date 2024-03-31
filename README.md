@@ -37,4 +37,27 @@ $ kubectl delete -f local -R
 
 # GCP 環境
 
-![](img/)
+![](img/gcp_environment.drawio.svg)
+※把握できたら更新する
+
+※Workflow+OpenTofu のみで現状セットアップが完了していないので、以下の追加対応をローカル PC から実施する。
+
+1. GKE と認証する
+
+   ```bash
+   $ gcloud container clusters get-credentials <CLUSTER NAME> --region <REGION>     --project <PROJECT NAME>
+   ```
+
+1. ポートフォーワードの設定をする
+
+   ```bash
+   $ kubectl port-forward service/argo-cd-argocd-server -n argocd 8080:443
+   ```
+
+1. ArgoCD のパスワードを生成する
+
+   ```bash
+   kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.    password}" | base64 -d
+   ```
+
+1. `localhost:8080`でアクセスする。username は初期は`admin`、パスワードは上記で生成されたもの。
