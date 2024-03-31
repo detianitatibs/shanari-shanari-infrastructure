@@ -2,7 +2,8 @@ name: Deploy infra resources to GCP
 
 on:
   push:
-    branches: ["6-build-gke"]
+    branches: ["main", "6-build-gke"]
+  pull_request:
 
 env:
   TF_VAR_GCP_PROJECT_NAME: ${{ secrets.GCP_PROJECT }}
@@ -48,3 +49,9 @@ jobs:
         id: "plan"
         working-directory: "tofu/gcp"
         run: tofu plan -input=false
+      - name: "OpenTofu apply"
+        id: "apply"
+        # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+        if: github.event_name == 'push'
+        working-directory: "tofu/gcp"
+        run: tofu apply -input=false -auto-approve
