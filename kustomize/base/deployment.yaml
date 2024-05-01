@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shanari-shanari--deployment
+  name: shanari-shanari-deployment
 spec:
   replicas: 2
   selector:
