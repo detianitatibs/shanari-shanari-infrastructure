@@ -12,19 +12,60 @@
 - [Docker Desktop](https://www.docker.com/ja-jp/products/personal/)
   - 個人開発のため
   - Kubernetes のプラグインを有効にする
+- kubectl
+  - Docker Desktop がインストール済みの場合は自動でインストールされている
+- argocd CLI
+  - Mac の場合は`brew install argocd`でインストールする
 
 ## 実行手順
+
+### ArgoCD の起動停止
+
+ローカル PC 上に ArgoCD を起動する。
+以下の手順で ArgoCD を起動する
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+
+Web Server にアクセスする際は、別のターミナルを立ち上げて、以下を実行しておく
+
+```
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+アクセス後は、username: `admin`とパスワードは下記の実行結果より生成されたものを入力してログインする。
+
+```
+argocd admin initial-password -n argocd
+```
+
+以下のコマンドで argocd に application をデプロイする
+
+```
+kubectl apply -n argocd -f local/argocd/application.yaml
+```
+
+停止、削除する場合は以下を実行する。
+
+```
+kubectl delete -n argocd -f local/argocd/application.yaml
+kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl delete namespace argocd
+```
 
 ### 起動
 
 以下のコマンドを実行してローカル PC 上の Kubernetes でアプリケーションを起動します。
 
 ```bash
-$ kubectl apply -k ./kustomize/base/fe/
+$ kubectl apply -k ./kustomize/base/
 ```
 
 ```bash
-$ kubectl delete -k ./kustomize/base/fe/
+$ kubectl delete -k ./kustomize/base/
 ```
 
 `http://localhost`でアクセスできます。  
