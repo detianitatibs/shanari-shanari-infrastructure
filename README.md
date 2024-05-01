@@ -20,7 +20,11 @@
 以下のコマンドを実行してローカル PC 上の Kubernetes でアプリケーションを起動します。
 
 ```bash
-$ kubectl apply -f local -R
+$ kubectl apply -k ./kustomize/base/fe/
+```
+
+```bash
+$ kubectl delete -k ./kustomize/base/fe/
 ```
 
 `http://localhost`でアクセスできます。  
@@ -33,6 +37,20 @@ ToDo: 自動でバージョンを変更するか、実行時に引数として�
 
 ```bash
 $ kubectl delete -f local -R
+```
+
+以下のコマンドでコンテキストの切り替えを実施する。
+
+- 一覧表示
+
+```bash
+$ kubectl config get-contexts
+```
+
+- 切り替え
+
+```bash
+$ kubectl config use-context <Clustername>
 ```
 
 # GCP 環境
