@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shanari-shanari-fe-deployment
+  name: shanari-shanari--deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: shanari-shanari-fe
+      app: shanari-shanari-
   template:
     metadata:
       labels:
-        app: shanari-shanari-fe
+        app: shanari-shanari
     spec:
       containers:
         - name: shanari-shanari-fe

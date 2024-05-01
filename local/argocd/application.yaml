@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shanari-argo-cd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/detianitatibs/shanari-shanari-infrastructure.git"
+    path: ./kustomize/overlays/prod/fe
+    targetRevision: 6-build-gke
+    directory:
+      recurse: false
+      jsonnet: {}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: shanari-shanari
+  syncPolicy:
+    automated: {}

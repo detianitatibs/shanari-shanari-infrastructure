@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shanari-shanari-fe-deployment
+  name: shanari-shanari-deployment
 spec:
   template:
     spec:
