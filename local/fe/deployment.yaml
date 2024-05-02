@@ -12,9 +12,11 @@ spec:
       labels:
         app: shanari-shanari-fe
     spec:
+      imagePullSecrets:
+        - name: argocd-gcp-secret
       containers:
         - name: shanari-shanari-fe
-          image: shanari-shanari-fe:v0.0.1
+          image: asia-northeast1-docker.pkg.dev/shanari-shanari/shanari-shanari/shanari-shanari-fe:277818ca3aa3eaf96dc6542bb11cb1367831251b
           resources:
             limits:
               memory: "128Mi"
