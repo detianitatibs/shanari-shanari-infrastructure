@@ -30,11 +30,11 @@ module "gke" {
   subnet_private_1_self_link = module.network.subnet_private_1_self_link
 }
 
-module "helm" {
-  source                     = "./modules/helm"
+# module "helm" {
+#   source                     = "./modules/helm"
 
-  gke_endpoint               = module.gke.gke_endpoint
-  gke_client_certificate     = module.gke.gke_client_certificate
-  gke_client_key             = module.gke.gke_client_key
-  gke_cluster_ca_certificate = module.gke.gke_cluster_ca_certificate
-}
+#   gke_endpoint               = module.gke.gke_endpoint
+#   gke_client_certificate     = module.gke.gke_client_certificate
+#   gke_client_key             = module.gke.gke_client_key
+#   gke_cluster_ca_certificate = module.gke.gke_cluster_ca_certificate
+# }
