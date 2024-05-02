@@ -1,0 +1,49 @@
+name: Deploy infra resources to GCP
+
+on:
+  workflow_dispatch:
+
+env:
+  TF_VAR_GCP_PROJECT_NAME: ${{ secrets.GCP_PROJECT }}
+  TF_VAR_GCP_REAGION: ${{ secrets.GCP_LOCATION }}
+  TF_VAR_APP_NAME: ${{ secrets.APP_NAME }}
+  STATE_BUCKET: ${{ secrets.STATE_BUCKET }}
+  STATE_PREFIX: ${{ secrets.STATE_PREFIX }}
+
+jobs:
+  setup-run-tofu:
+    name: Setup, Run Tofu
+    runs-on: ubuntu-latest
+    environment: GCP
+
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Configure Workload Identity Federation and generate an access token.
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          token_format: "access_token"
+          project_id: ${{ secrets.GCP_PROJECT }}
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      # OpenTofu
+      - uses: "opentofu/setup-opentofu@v1"
+      - name: "OpenTofu init"
+        id: "init"
+        working-directory: "tofu/gcp"
+        run: |
+          tofu init \
+          -backend-config="bucket=${STATE_BUCKET}" \
+          -backend-config="prefix=${STATE_PREFIX}"
+      - name: "OpenTofu destroy"
+        id: "apply"
+        working-directory: "tofu/gcp"
+        run: tofu destroy -input=false -auto-approve

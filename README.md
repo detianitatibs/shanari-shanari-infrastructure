@@ -6,31 +6,31 @@
 
 ![](img/local_development.drawio.svg)
 
-以下の開発ツールを準備する
+# GCP 環境
 
-- [Visual Studio Code](https://azure.microsoft.com/ja-jp/products/visual-studio-code)
-- [Docker Desktop](https://www.docker.com/ja-jp/products/personal/)
-  - 個人開発のため
-  - Kubernetes のプラグインを有効にする
+![](img/gcp_environment.drawio.svg)
+※把握できたら更新する
 
-## 実行手順
+※Workflow+OpenTofu のみで現状セットアップが完了していないので、以下の追加対応をローカル PC から実施する。
 
-### 起動
+1. GKE と認証する
 
-以下のコマンドを実行してローカル PC 上の Kubernetes でアプリケーションを起動します。
+   ```bash
+   $ gcloud container clusters get-credentials <CLUSTER NAME> --region <REGION> --project <PROJECT NAME>
+   ```
+
+## コンテキスト(接続先の Kuberenetes)の切り替え
+
+以下のコマンドでコンテキストの切り替えを実施する。
+
+- 一覧表示
 
 ```bash
-$ kubectl apply -f local -R
+$ kubectl config get-contexts
 ```
 
-`http://localhost`でアクセスできます。  
-新しい Image を作成した場合は、各 deployment.yaml のバージョンを変更します。  
-ToDo: 自動でバージョンを変更するか、実行時に引数として渡せるかの対応を検討する
-
-### 停止
-
-以下のコマンドを実行してローカル PC 上の Kubernetes でアプリケーションを停止します。
+- 切り替え
 
 ```bash
-$ kubectl delete -f local -R
+$ kubectl config use-context <Clustername>
 ```
