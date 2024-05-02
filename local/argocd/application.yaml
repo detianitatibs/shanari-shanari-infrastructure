@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: shanari-argo-cd
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/image-list: my-image=asia.gcr.io/shanari-shanari/shanari-shanari
+    argocd-image-updater.argoproj.io/my-image.update-strategy: latest
 spec:
   project: default
   source:
