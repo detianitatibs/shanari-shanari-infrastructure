@@ -19,6 +19,12 @@
    $ gcloud container clusters get-credentials <CLUSTER NAME> --region <REGION> --project <PROJECT NAME>
    ```
 
+1. ArgoCD に GKE クラスターを登録する
+   ```bash
+   $ kubectl config get-contexts -o name
+   $ argocd cluster add <TARGET CONTEXT>
+   ```
+
 ## コンテキスト(接続先の Kuberenetes)の切り替え
 
 以下のコマンドでコンテキストの切り替えを実施する。
