@@ -17,3 +17,9 @@ resource "google_container_cluster" "gke" {
   subnetwork = var.subnet_private_1_self_link
 
 }
+
+# Storage for blog posts
+resource "google_storage_bucket" "blog" {
+  name     = "${var.app_name}-blog-posts"
+  location = "ASIA-NORTHEAST1"
+}
