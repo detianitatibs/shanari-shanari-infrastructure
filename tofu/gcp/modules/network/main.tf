@@ -21,7 +21,7 @@ resource "google_project_service" "service_networking" {
 }
 
 resource "google_compute_global_address" "private_ip_address" {
-  name          = "private-ip"
+  name          = "${var.app_name}-private-ip"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
@@ -31,5 +31,6 @@ resource "google_compute_global_address" "private_ip_address" {
 resource "google_service_networking_connection" "private_vpc_connection" {
   network                 = google_compute_network.vpc.id
   service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+  # reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+  reserved_peering_ranges = []
 }
