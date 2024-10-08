@@ -12,3 +12,24 @@ resource "google_compute_subnetwork" "subnet_private_1" {
   region        = "${var.gcp_region}"
   network       = google_compute_network.vpc.id
 }
+
+# プライベートネットワーク内にCloudSQLを準備するためPrivate Service Connectionを作成
+# 参考: https://zenn.dev/ring_belle/articles/gcp-gke-cloudrun-private
+resource "google_project_service" "service_networking" {
+  service            = "servicenetworking.googleapis.com"
+  disable_on_destroy = false
+}
+
+resource "google_compute_global_address" "private_ip_address" {
+  name          = "private-ip"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = google_compute_network.vpc.id
+}
+
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network                 = google_compute_network.vpc.id
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+}
