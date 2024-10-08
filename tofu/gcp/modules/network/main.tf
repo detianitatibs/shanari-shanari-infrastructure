@@ -21,7 +21,7 @@ resource "google_project_service" "service_networking" {
 }
 
 resource "google_compute_global_address" "private_ip_address" {
-  name          = "${var.app_name}-private-ip"
+  name          = "shanari-vpc-ip-range"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
