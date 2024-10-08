@@ -10,6 +10,8 @@ env:
   TF_VAR_GCP_PROJECT_NAME: ${{ secrets.GCP_PROJECT }}
   TF_VAR_GCP_REAGION: ${{ secrets.GCP_LOCATION }}
   TF_VAR_APP_NAME: ${{ secrets.APP_NAME }}
+  TF_VAR_POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  TF_VAR_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
   STATE_BUCKET: ${{ secrets.STATE_BUCKET }}
   STATE_PREFIX: ${{ secrets.STATE_PREFIX }}
 
