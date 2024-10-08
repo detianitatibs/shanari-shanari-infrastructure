@@ -31,7 +31,7 @@ module "gke" {
 }
 
 module "cloudsql" {
-  source = "./module/cloudsql"
+  source                     = "./modules/cloudsql"
 
   app_name                   = var.APP_NAME
   gcp_region                 = var.GCP_REAGION
