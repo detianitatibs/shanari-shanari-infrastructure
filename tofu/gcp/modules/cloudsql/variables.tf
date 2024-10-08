@@ -10,15 +10,9 @@ variable "gcp_region" {
   sensitive   = true
 }
 
-variable "vpc_self_link" {
+variable "vpc_id" {
   type        = string
-  description = "The self_link of vpc"
-  sensitive   = true
-}
-
-variable "subnet_private_1_self_link" {
-  type        = string
-  description = "The self_link of private subnet1"
+  description = "The id of vpc"
   sensitive   = true
 }
 

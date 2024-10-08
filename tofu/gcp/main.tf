@@ -37,6 +37,5 @@ module "cloudsql" {
   gcp_region                 = var.GCP_REAGION
   admin_user                 = var.POSTGRES_USER
   admin_password             = var.POSTGRES_PASSWORD
-  vpc_self_link              = module.network.vpc_self_link
-  subnet_private_1_self_link = module.network.subnet_private_1_self_link
+  vpc_id                     = module.network.vpc_id
 }

@@ -17,7 +17,7 @@ resource "google_sql_database_instance" "postgres" {
     availability_type = "REGIONAL"
     ip_configuration {
       ipv4_enabled    = false
-      private_network = "${var.subnet_private_1_self_link}"
+      private_network = "${var.vpc_id}"
     }
   }
 
