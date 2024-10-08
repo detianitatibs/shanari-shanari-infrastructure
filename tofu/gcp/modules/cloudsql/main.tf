@@ -24,7 +24,7 @@ resource "google_sql_database_instance" "postgres" {
   lifecycle {
     ignore_changes = [
       name,
-      disk_size
+      settings[0].disk_size
     ]
   }
 }
