@@ -39,3 +39,9 @@ module "cloudsql" {
   admin_password             = var.POSTGRES_PASSWORD
   vpc_id                     = module.network.vpc_id
 }
+
+module "storage" {
+  source                     = "./modules/storage"
+
+  app_name                   = var.APP_NAME
+}
