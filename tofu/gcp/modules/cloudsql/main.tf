@@ -15,6 +15,7 @@ resource "google_sql_database_instance" "postgres" {
     disk_size         = 10
     disk_autoresize   = true
     availability_type = "REGIONAL"
+    activation_policy = "NEVER"
     ip_configuration {
       ipv4_enabled    = false
       private_network = "${var.vpc_id}"
