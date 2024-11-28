@@ -30,15 +30,15 @@ module "gke" {
   subnet_private_1_self_link = module.network.subnet_private_1_self_link
 }
 
-module "cloudsql" {
-  source                     = "./modules/cloudsql"
+# module "cloudsql" {
+#   source                     = "./modules/cloudsql"
 
-  app_name                   = var.APP_NAME
-  gcp_region                 = var.GCP_REAGION
-  admin_user                 = var.POSTGRES_USER
-  admin_password             = var.POSTGRES_PASSWORD
-  vpc_id                     = module.network.vpc_id
-}
+#   app_name                   = var.APP_NAME
+#   gcp_region                 = var.GCP_REAGION
+#   admin_user                 = var.POSTGRES_USER
+#   admin_password             = var.POSTGRES_PASSWORD
+#   vpc_id                     = module.network.vpc_id
+# }
 
 module "storage" {
   source                     = "./modules/storage"
